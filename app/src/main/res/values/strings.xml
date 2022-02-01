@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">MoveNFall</string>
+
+    <string name="prefs_file">com.example.detectordecaidas.PREFERENCES_KEY_FILE</string>
+    <string name="user_file">com.example.detectordecaidas.USER_DATA_KEY_FILE</string>
+    <string name="settings_file">com.example.detectordecaidas.SETTINGS_KEY_FILE</string>
+    <string name="channel_name">channelID</string>
+    <string name="channel_description">channel</string>
+
+    <string name="userName">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="repeatPassword">Repetir contraseña</string>
+    <string name="userNameSignIn">INICIAR SESIÓN</string>
+    <string name="userNameLogIn">CREAR USUARIO</string>
+
+    <string name="registerUser">REGISTRAR USUARIO</string>
+    <string name="authBack">VOLVER A INICIO DE SESIÓN</string>
+    <string name="homeBack">VOLVER AL MENÚ PRINCIPAL</string>
+    <string name="trainingBack">SELECCIONAR ACTIVIDAD</string>
+
+    <string name="userData">DATOS DE USUARIO</string>
+
+    <string name="fallMonitoring">MONITORIZACIÓN DE CAÍDAS</string>
+    <string name="trainingData">MONITORIZAR ACTIVIDADES</string>
+    <string name="configuration">CONFIGURACIÓN</string>
+    <string name="modifyUserData">MODIFICAR DATOS DE USUARIO</string>
+    <string name="signOut">CERRAR SESIÓN</string>
+
+    <string name="uselessString1">¿No tienes un usuario?</string>
+    <string name="uselessString2">Género</string>
+    <string name="uselessString3">Datos de usuario</string>
+    <string name="uselessString4">Configuración del sistema</string>
+
+    <string name="nameData">Nombre</string>
+    <string name="mobileData">Número de emergencia</string>
+    <string name="ageData">Edad</string>
+    <string name="heightData">Altura (cm)</string>
+    <string name="weightData">Peso</string>
+    <string name="maleData">Masculino</string>
+    <string name="feminineData">Femenino</string>
+
+    <string name="saveData">GUARDAR Y SALIR</string>
+
+    <string name="fallSensibility">Sensibilidad de la caida</string>
+    <string name="impactSensibility">Sensibilidad de la fuerza de impacto</string>
+    <string name="samplingRate">Velocidad de muestreo</string>
+
+    <string name="percentValue">100%</string>
+    <string name="minimumSample">BAJA</string>
+    <string name="mediumSample">MEDIA</string>
+    <string name="maximumSample">ALTA</string>
+
+    <string name="training">Actividad</string>
+    <string name="description">Descripción</string>
+
+    <string name="training0">ESCALERAS</string>
+    <string name="training1">TUMBARSE</string>
+    <string name="training2">CAMINAR</string>
+    <string name="training3">CARRERA</string>
+    <string name="training4">SALTOS</string>
+    <string name="training5">SENTARSE</string>
+    <string name="training6">ALZAR OBJETO</string>
+    <string name="training7">ASCENSOR</string>
+    <string name="training8">MON. CONTINUO</string>
+    <string name="training9">OTRAS</string>
+
+    <string name="trainingName0">Subir y bajar escaleras</string>
+    <string name="trainingName1">Tumbarse en la cama</string>
+    <string name="trainingName2">Caminar</string>
+    <string name="trainingName3">Carrera ligera</string>
+    <string name="trainingName4">Dar saltos</string>
+    <string name="trainingName5">Sentarse en una silla</string>
+    <string name="trainingName6">Levantar un objeto del suelo</string>
+    <string name="trainingName7">Subir y bajar en ascensor</string>
+    <string name="trainingName8">Monitorizacion continua</string>
+    <string name="trainingName9">Nueva actividad</string>
+
+    <string name="mobileLocation">Sitúe el móvil a la altura de la cintura.\n</string>
+    <string name="description0">Subir y bajar varios tramos de escaleras.</string>
+    <string name="description1">Tumbarse y levantarse de la cama varias veces.</string>
+    <string name="description2">Caminar durante un tiempo.</string>
+    <string name="description3">Carrera ligera durante un tiempo.</string>
+    <string name="description4">Dar algunos saltos.</string>
+    <string name="description5">Sentarse y levantarse de la silla varias veces.</string>
+    <string name="description6">Levantar un objeto de suelo varias veces</string>
+    <string name="description7">Subir y bajar en ascensor.\nEspere a que se recupere la señal antes de detener la actividad.</string>
+    <string name="description8">Monitorizar la actividad durante un largo periodo de tiempo.</string>
+    <string name="description9">Realizar la actividad de ha seleccionado.</string>
+
+    <string name="recordingData">GRABANDO ACTIVIDAD</string>
+    <string name="recordingStopped">GRABACIÓN DETENIDA</string>
+
+    <string name="startMonitoring">MONITORIZACIÓN INICIADA</string>
+    <string name="stopMonitoring">MONITORIZACIÓN DETENIDA</string>
+
+    <string name="startButton">INICIAR</string>
+    <string name="stopButton">DETENER</string>
+
+</resources>

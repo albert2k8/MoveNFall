@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "923071518264",
+    "project_id": "detectordecaidas-tfg21",
+    "storage_bucket": "detectordecaidas-tfg21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923071518264:android:0b8a65fae479977234b8cd",
+        "android_client_info": {
+          "package_name": "com.example.detectordecaidas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923071518264-gr5n08996tvir9fe8kflup7a2jsl5609.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.detectordecaidas",
+            "certificate_hash": "b8db2d316ea8549d4cbd1eb7c6b01692e0e593b9"
+          }
+        },
+        {
+          "client_id": "923071518264-ut12158el5ifn3l7qklgltk4s2dujdr9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfR5Msqc7OpIwUHjup3Od9qw-Fmk6myNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923071518264-ut12158el5ifn3l7qklgltk4s2dujdr9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

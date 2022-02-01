@@ -1,0 +1,349 @@
+package com.example.detectordecaidas
+
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.net.Uri
+import android.os.*
+import android.telecom.TelecomManager
+import androidx.appcompat.app.AppCompatActivity
+import android.telephony.SmsManager
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.math.sqrt
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.location.LocationManager
+import android.os.Looper
+import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.*
+
+enum class ProviderType{
+    EMAIL_AND_PASSWORD,
+    GOOGLE_ACCOUNT,
+    ANONYMOUS
+}
+
+private const val REQUEST_CODE = 160292
+private const val gravity : Double = 9.81
+private const val channelID : String = "channelID"
+private const val notificationId = 0
+
+class HomeActivity : AppCompatActivity(), SensorEventListener {
+
+    private lateinit var sensorManager: SensorManager
+    private lateinit var notificationBuilder: NotificationCompat.Builder
+    private lateinit var fusedLocationProviderClient : FusedLocationProviderClient
+
+    private var sensorDelay : Int = SensorManager.SENSOR_DELAY_UI
+    private var currentTime : Long = 0
+    private var fallSensitivity : Double = 0.0
+    private var impactSensitivity : Double = 0.0
+    private var falling : Boolean = false
+    private var impact : Boolean = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_home)
+
+        val bundle = intent.extras
+        val userID = bundle?.getString("userID")
+        val userName = bundle?.getString("userName")
+
+        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+        prefs.putString("userID", userID)
+        prefs.putString("userName", userName)
+        prefs.apply()
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
+        setup(userName ?: "")
+    }
+
+    // Funcion con la obtencion y el proceasdo de la mediciones del acelerometro
+    override fun onDestroy() {
+        super.onDestroy()
+        sensorManager.unregisterListener(this)
+    }
+
+    override fun onSensorChanged(p0: SensorEvent?) {
+        if(p0?.sensor?.type == Sensor.TYPE_ACCELEROMETER){
+            processingData(p0.values[0].toDouble(), p0.values[1].toDouble(), p0.values[2].toDouble())
+        }
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+
+    }
+
+    private fun setup(userName : String){
+
+        title = "Menú principal"
+
+        val personalDataButton = findViewById<Button>(R.id.personalDataButton)
+        val emergencyContactButton = findViewById<Button>(R.id.emergencyContactButton)
+        val trainingDataButton = findViewById<Button>(R.id.trainingDataButton)
+        val settingButton = findViewById<Button>(R.id.settingButton)
+
+        findViewById<TextView>(R.id.userNameEditText).text = userName
+
+        val settingsPreferences = getSharedPreferences(getString(R.string.settings_file), Context.MODE_PRIVATE)
+        fallSensitivity = settingsPreferences.getString("fall", "40")!!.toDouble()
+        impactSensitivity = settingsPreferences.getString("impact", "300")!!.toDouble()
+
+        val normal = settingsPreferences.getString("ui", "true")
+        val game = settingsPreferences.getString("game", "false")
+        val fastest = settingsPreferences.getString("fastest", "false")
+
+        personalDataButton.setOnClickListener {
+            showPersonalDataActivity()
+        }
+
+        emergencyContactButton.setOnClickListener {
+            showEmergencyContactActivity()
+        }
+
+        trainingDataButton.setOnClickListener {
+            showTrainingDataActivity()
+        }
+
+        settingButton.setOnClickListener {
+            showSettingActivity()
+        }
+
+        notificationBuilder = NotificationCompat.Builder(this, channelID)
+            .setSmallIcon(R.drawable.ic_notification_icon)
+            .setContentTitle("Detector de caidas")
+            .setStyle(NotificationCompat.BigTextStyle().bigText("Se ha detectado un caida.\nPor favor, abra la aplicación si desea cancelar el aviso"))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+        createNotificationChannel()
+
+
+        when {
+            normal.equals("true") -> {
+                sensorDelay = SensorManager.SENSOR_DELAY_UI
+            }
+            game.equals("true") -> {
+                sensorDelay = SensorManager.SENSOR_DELAY_GAME
+            }
+            fastest.equals("true") -> {
+                sensorDelay = SensorManager.SENSOR_DELAY_FASTEST
+            }
+        }
+
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also {
+            sensorManager.registerListener(this, it,  sensorDelay, SensorManager.SENSOR_DELAY_UI)
+        }
+
+    }
+
+    private fun processingData(ax : Double, ay : Double, az : Double){
+
+        val module = sqrt(ax*ax + ay*ay + az*az)
+
+        if(module <= gravity* fallSensitivity/100 && !falling){
+            currentTime = System.currentTimeMillis() + 1000
+            falling = true
+        }
+        else if(module >= gravity*impactSensitivity/100 && falling && System.currentTimeMillis() <= currentTime){
+            impact = true
+            sensorManager.unregisterListener(this)
+        }
+        else if(falling && System.currentTimeMillis() > currentTime){
+            falling = false
+            impact = false
+        }
+
+        if(falling && impact){
+            with(NotificationManagerCompat.from(this)) {
+                notify(notificationId, notificationBuilder.build())
+            }
+            showFallDetectionMessage()
+            falling = false
+            impact = false
+        }
+    }
+
+    private fun notifyFall(){
+
+        if(isLocationEnabled()){
+            getCurrentLocation()
+        }
+        else{
+            sendSMS(Double.NaN, Double.NaN)
+        }
+        phoneCall()
+
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also {
+            sensorManager.registerListener(this, it,  sensorDelay, SensorManager.SENSOR_DELAY_UI)
+        }
+    }
+
+    // Funcion para obtener la geolocalizacion.
+    private fun getCurrentLocation(){
+        val task = fusedLocationProviderClient.lastLocation
+
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
+            return
+        }
+
+        task.addOnSuccessListener {
+            if(it != null){
+                sendSMS(it.latitude, it.longitude)
+            }
+            else{
+                getNewLocation()
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getNewLocation(){
+        val locationRequest = LocationRequest.create()?.apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            numUpdates = 2
+        }
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+    }
+
+    private val locationCallback = object : LocationCallback(){
+        override fun onLocationResult(p0: LocationResult) {
+            val lastLocation = p0.lastLocation
+            sendSMS(lastLocation.latitude, lastLocation.longitude)
+        }
+    }
+
+    private fun sendSMS(latitude : Double, longitude : Double){
+        val emergencyContactPreferences = getSharedPreferences(getString(R.string.contact_file), Context.MODE_PRIVATE)
+        val personalPreferences = getSharedPreferences(getString(R.string.user_file), Context.MODE_PRIVATE)
+        val personalName = personalPreferences.getString("name", "")
+        val mobile = emergencyContactPreferences.getString("mobile", "")
+
+        val message : String = if(!latitude.isNaN() && !longitude.isNaN()){
+            "$personalName ha sufrido una caida. https://www.google.es/maps?q=$latitude,$longitude"
+        } else{
+            "$personalName ha sufrido una caida"
+        }
+
+        SmsManager.getDefault().sendTextMessage(mobile, null, message, null, null)
+    }
+
+    private fun phoneCall(){
+        val emergencyContactPreferences = getSharedPreferences(getString(R.string.contact_file), Context.MODE_PRIVATE)
+        val mobileNumber = emergencyContactPreferences.getString("mobile", "")
+        val intent = Intent(Intent.ACTION_CALL)
+        intent.putExtra(TelecomManager.EXTRA_START_CALL_WITH_SPEAKERPHONE, true)
+        intent.data = Uri.parse("tel:$mobileNumber")
+        startActivity(intent)
+    }
+
+    private fun isLocationEnabled() : Boolean{
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    private fun showFallDetectionMessage(){
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Notification Title")
+            .setMessage("Do you really want to delete the file?")
+            .setPositiveButton("Aceptar") { _, _ ->
+                notifyFall()
+            }
+            .setNegativeButton("Cancelar"){ _, _ ->
+                Toast.makeText(applicationContext, "Aviso cancelado", Toast.LENGTH_SHORT).show()
+                val sensorDelay = SensorManager.SENSOR_DELAY_GAME
+                sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also {
+                    sensorManager.registerListener(this, it,  sensorDelay, SensorManager.SENSOR_DELAY_UI)
+                }
+            }
+            .create()
+
+        dialog.setOnShowListener(object : DialogInterface.OnShowListener {
+
+            private val AUTO_DISMISS_MILLIS = 60000
+
+            override fun onShow(dialog: DialogInterface) {
+                val defaultButton = (dialog as AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE)
+                val positiveButtonText = defaultButton.text
+
+                object : CountDownTimer(AUTO_DISMISS_MILLIS.toLong(), 100) {
+
+                    override fun onTick(millisUntilFinished: Long) {
+                        defaultButton.text = String.format(Locale.getDefault(), "%s (%d)", positiveButtonText, TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)+1)
+                    }
+
+                    override fun onFinish() {
+                        if (dialog.isShowing) {
+                            dialog.dismiss()
+                            notifyFall()
+                        }
+                    }
+                }.start()
+            }
+        })
+
+        dialog.show()
+    }
+
+    private fun createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.channel_name)
+            val descriptionText = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelID, name, importance).apply {
+                description = descriptionText
+            }
+
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun showPersonalDataActivity(){
+        val intent = Intent(this, PersonalDataActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showEmergencyContactActivity(){
+        val intent = Intent(this, EmergencyContactDataActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showTrainingDataActivity(){
+        val intent = Intent(this, TrainingSelectionActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showSettingActivity(){
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+}

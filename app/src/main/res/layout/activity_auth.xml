@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    tools:context=".AuthActivity">
+
+    <LinearLayout
+        android:id="@+id/authLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/userNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="50dp"
+            android:drawableStart="@mipmap/user_name_icon"
+            android:drawablePadding="10dp"
+            android:drawableTint="#000000"
+            android:ems="10"
+            android:hint="@string/userName"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:minHeight="50dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/darkGray"
+            tools:ignore="TextContrastCheck" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="50dp"
+            android:drawableStart="@mipmap/user_key_edit"
+            android:drawablePadding="10dp"
+            android:drawableTint="#000000"
+            android:ems="10"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="50dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/darkGray"
+            tools:ignore="TextContrastCheck" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <Button
+            android:id="@+id/signInButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="40dp"
+            android:text="@string/userNameSignIn"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:icon="@mipmap/sign_in_button"
+            app:iconPadding="10dp"
+            app:iconTint="#000"
+            app:strokeColor="@color/black" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/uselessTextView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/uselessString1"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+
+        <Button
+            android:id="@+id/userNameLogInButton"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/userNameLogIn"
+            android:textColor="@color/darkBlue"
+            android:textSize="16sp"
+            android:textStyle="normal|bold"
+            tools:ignore="TextContrastCheck" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/drawable/acticity_auth_background.xml" value="0.3072916666666667" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/drawable/activity_auth_background.xml" value="0.3072916666666667" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/drawable/activity_home_background.xml" value="0.3072916666666667" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/drawable/activity_log_in_background.xml" value="0.3072916666666667" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/drawable/reset_password_background.xml" value="0.3296875" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/drawable/toggle_button_off.xml" value="0.3671875" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/drawable/toggle_button_on.xml" value="0.3671875" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/drawable/toggle_button_selector.xml" value="0.3671875" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_add_emergency_contact_data.xml" value="0.3125" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_add_personal_data.xml" value="0.3125" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_auth.xml" value="0.31145833333333334" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_emergency_contact_data.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_home.xml" value="0.35597826086956524" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_log_in.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_personal_data.xml" value="0.3125" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_record_data.xml" value="0.284375" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_reset_password.xml" value="0.31354166666666666" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_sign_in.xml" value="0.29010416666666666" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_training_data.xml" value="0.3125" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas/app/src/main/res/layout/activity_user_key_log_in.xml" value="0.33" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas3/app/src/main/res/layout/activity_auth.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas3/app/src/main/res/layout/activity_fall_monitoring.xml" value="0.28020833333333334" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas3/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas3/app/src/main/res/layout/activity_record_data.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas3/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas3/app/src/main/res/layout/activity_training_selection.xml" value="0.28020833333333334" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas3/app/src/main/res/layout/activity_user_name_log_in.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas_final/app/src/main/res/layout/activity_fall_monitoring.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas_final/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas_final/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas_final/app/src/main/res/layout/activity_training_selection.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/Desktop/DetectorDeCaidas_final/app/src/main/res/layout/activity_user_name_log_in.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_add_emergency_contact_data.xml" value="0.18115942028985507" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_add_personal_data.xml" value="0.18115942028985507" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_auth.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_home.xml" value="0.22" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_modify_user_data.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_monitor_activity.xml" value="0.13177083333333334" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_settings.xml" value="0.21" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_training_selection.xml" value="0.16770833333333332" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_user_key_log_in.xml" value="0.22" />
+        <entry key="..\:/Users/alber/OneDrive/Escritorio/DetectorDeCaidas2/app/src/main/res/layout/activity_user_name_log_in.xml" value="0.18115942028985507" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
